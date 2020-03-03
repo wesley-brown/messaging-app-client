@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MessageComponent } from './message/message.component';
+import { MessageListComponent } from './message-list/message-list.component';
 
 @NgModule({
-  declarations: [MessageComponent],
+  declarations: [MessageComponent, MessageListComponent],
   imports: [CommonModule],
-  exports: [MessageComponent]
+  exports: [MessageListComponent]
 })
 export class MessagesModule { }
