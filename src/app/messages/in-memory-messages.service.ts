@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Message } from './message';
+import { MessagesService } from './messages.service';
 
 /**
  * Manages messages in-memory.
@@ -7,26 +8,22 @@ import { Message } from './message';
 @Injectable({
   providedIn: 'root'
 })
-class InMemoryMessagesService {
-
-  /**
-   * The list of messages currently being managed.
-   */
-  messages: Message[];
+class InMemoryMessagesService implements MessagesService {
+  private _messages: Message[];
 
   /**
    * @param messages A list of existing messages to manage.
    */
   constructor(@Inject('messages') messages: Message[]) {
-    this.messages = messages;
+    this._messages = messages;
   }
 
-  /**
-   * Send a message.
-   * @param message The message to send.
-   */
+  messages(): Message[] {
+    return this._messages;
+  }
+
   sendMessage(message: Message): void {
-    this.messages.push(message);
+    this._messages.push(message);
   }
 }
 

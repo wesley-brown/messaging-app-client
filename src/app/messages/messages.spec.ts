@@ -1,4 +1,4 @@
-import { InMemoryMessagesService } from './in-memory-messages-service';
+import { InMemoryMessagesService } from './in-memory-messages.service';
 import { Message } from './message';
 
 describe('When using messages', function() {
@@ -9,7 +9,7 @@ describe('When using messages', function() {
     ];
     const messagesService = new InMemoryMessagesService(messages);
     messagesService.sendMessage(new Message('Good. How about you?'));
-    expect(messagesService.messages).toEqual([
+    expect(messagesService.messages()).toEqual([
       new Message('How are you?'),
       new Message('Good. How about you?')
     ]);

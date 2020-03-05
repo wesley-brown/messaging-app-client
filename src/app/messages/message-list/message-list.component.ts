@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import { InMemoryMessagesService } from '../in-memory-messages-service';
 import { Message } from '../message';
-import { messages as messageList } from '../../messages';
+import { AngularMessagesService } from '../angular-messages.service';
 
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css'],
-  providers: [
-    { provide: InMemoryMessagesService, useValue: { messages: messageList } }
-  ]
+  providers: [AngularMessagesService]
 })
 export class MessageListComponent implements OnInit {
-  messages: Message[] = this.messagesService.messages;
+  messages: Message[];
 
-  constructor(private messagesService: InMemoryMessagesService) {}
+  constructor(private messagesService: AngularMessagesService) {
+    this.messages = messagesService.messages();
+  }
 
   ngOnInit(): void {
   }
