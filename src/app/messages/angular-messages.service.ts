@@ -12,14 +12,14 @@ class MessageResponse {
 
 @Injectable()
 class AngularMessagesService implements MessagesService {
+  // Go through proxy server because of CORS
+  private url = 'http://localhost:4200/api/'
 
   constructor(private http: HttpClient) {}
 
   messages(): Message[] {
-    // Go through proxy server because of CORS
-    const url = 'http://localhost:4200/api/messages';
     let messages = [];
-    this.http.get<Message[]>(url)
+    this.http.get<Message[]>(this.url + 'messages')
       .subscribe((data: MessageResponse[]) => {
         for (let response of data) {
           messages.push(new Message(response.content));
@@ -29,7 +29,12 @@ class AngularMessagesService implements MessagesService {
   }
 
   sendMessage(message: Message): void {
-    // no-op
+    this.http.post<Message>(this.url + 'messages', {
+      senderId: 1,
+      receiverId: 2,
+      content: message.content
+    })
+    .subscribe(data => {}); // subscribe must be called
   }
 }
 
