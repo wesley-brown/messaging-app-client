@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+
 import { Message } from './message';
 import { MessagesService } from './messages.service';
 
@@ -12,14 +14,13 @@ class MessageResponse {
 
 @Injectable()
 class AngularMessagesService implements MessagesService {
-  // Go through proxy server because of CORS
-  private url = 'http://localhost:4200/api/'
+  private messagesUrl = environment.apiUrl + '/messages';
 
   constructor(private http: HttpClient) {}
 
   messages(): Message[] {
     let messages = [];
-    this.http.get<Message[]>(this.url + 'messages')
+    this.http.get<Message[]>(this.messagesUrl)
       .subscribe((data: MessageResponse[]) => {
         for (let response of data) {
           messages.push(new Message(response.content));
@@ -29,7 +30,7 @@ class AngularMessagesService implements MessagesService {
   }
 
   sendMessage(message: Message): void {
-    this.http.post<Message>(this.url + 'messages', {
+    this.http.post<Message>(this.messagesUrl, {
       senderId: 1,
       receiverId: 2,
       content: message.content
