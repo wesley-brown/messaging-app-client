@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { UsersModule } from './users/users.module';
 import { MessagesModule } from './messages/messages.module';
 
 @NgModule({
@@ -12,6 +13,8 @@ import { MessagesModule } from './messages/messages.module';
   imports: [
     BrowserModule,
     HttpClientModule,
+    
+    UsersModule,
     MessagesModule
   ],
   providers: [],
