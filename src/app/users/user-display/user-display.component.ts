@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { User } from '../user';
 
@@ -8,11 +8,15 @@ import { User } from '../user';
   styleUrls: ['./user-display.component.css']
 })
 export class UserDisplayComponent implements OnInit {
-  user: User = new User(1, 'user1@example.com');
+  @Input() private readonly user: User;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+  }
+
+  userEmail(): string {
+    return this.user.email;
   }
 
 }
