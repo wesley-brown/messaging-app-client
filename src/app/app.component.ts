@@ -9,5 +9,8 @@ import { User } from './users/user';
 })
 export class AppComponent {
   title = 'messaging-app-client';
-  user = new User(1, 'user1@example.com');
+  users = [
+    new User(1, 'user1@example.com'),
+    new User(2, 'user2@example.com')
+  ];
 }
