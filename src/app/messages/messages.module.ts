@@ -7,11 +7,14 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageFormComponent } from './message-form/message-form.component';
 
+import { UsersModule } from '../users/users.module';
+
 @NgModule({
   declarations: [MessageComponent, MessageListComponent, MessagesComponent, MessageFormComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UsersModule
 ],
   exports: [MessagesComponent]
 })
