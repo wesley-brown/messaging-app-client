@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 import { User } from './user';
 
@@ -12,14 +13,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  users(): User[] {
-    let users = [];
-    this.http.get<User[]>(this.usersUrl)
-      .subscribe((receivedUsers: User[]) => {
-        for (const user of receivedUsers) {
-          users.push(user);
-        }
-      });
-    return users;
+  users(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl);
   }
 }
