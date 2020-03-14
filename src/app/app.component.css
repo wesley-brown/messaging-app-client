@@ -1,0 +1,14 @@
+nav {
+  background-color: #24292e;
+  color: white;
+  padding: 1px;
+}
+
+a {
+  color: white;
+  margin: 10px;
+}
+
+a:link {
+  text-decoration: none;
+}
