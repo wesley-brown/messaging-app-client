@@ -1,0 +1,15 @@
+app-message-list {
+  height: 500px;
+  overflow-y: auto;
+  width: 500px;
+}
+
+app-user-list {
+  height: 500px;
+  overflow-y: auto;
+  width: 300px;
+}
+
+#message-and-user-section {
+  display: flex;
+}
