@@ -23,15 +23,16 @@ class AngularMessagesService implements MessagesService {
     this.http.get<Message[]>(this.messagesUrl)
       .subscribe((data: MessageResponse[]) => {
         for (let response of data) {
-          messages.push(new Message(response.content));
+          messages.push(new Message(response.content, response.sender));
         }
       });
     return messages;
   }
 
   sendMessage(message: Message): void {
+    console.log(message);
     this.http.post<Message>(this.messagesUrl, {
-      senderId: 1,
+      senderId: message.sender.id,
       receiverId: 2,
       content: message.content
     })

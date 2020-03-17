@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 
 import { AngularMessagesService } from '../angular-messages.service';
 import { Message } from '../message';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user';
 
 @Component({
   selector: 'app-message-form',
@@ -15,10 +17,12 @@ export class MessageFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private messagesService: AngularMessagesService
+    private messagesService: AngularMessagesService,
+    private usersService: UsersService
   ) { 
     this.messageForm = this.formBuilder.group({
-      content: ''
+      content: '',
+      senderId: ''
     });
   }
 
@@ -26,8 +30,12 @@ export class MessageFormComponent implements OnInit {
   }
 
   onSubmit(messageData): void {
-    const message = new Message(messageData.content);
-    this.messagesService.sendMessage(message);
+    this.usersService.findUserById(messageData.senderId).subscribe(data => {
+      console.log(data);
+      const sender = new User(data.id, data.email);
+      const message = new Message(messageData.content, sender);
+      this.messagesService.sendMessage(message);
+    });
   }
 
 }

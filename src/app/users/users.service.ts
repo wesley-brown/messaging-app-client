@@ -25,4 +25,8 @@ export class UsersService {
   addUser(addUserRequest: AddUserRequest): Observable<User> {
     return this.http.post<User>(this.usersUrl, addUserRequest);
   }
+
+  findUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/${id}`);
+  }
 }

@@ -1,4 +1,8 @@
 <form [formGroup]="messageForm" (ngSubmit)="onSubmit(messageForm.value)">
-  <input id="content" type="text" formControlName="content"/>
+  <label for="senderId">Sender ID:&nbsp;</label>
+  <input id="senderId" type="text" formControlName="senderId">
+
+  <label for="content">Message:&nbsp;</label>
+  <input id="content" type="text" formControlName="content">
   <button>Send Message</button>
 </form>
